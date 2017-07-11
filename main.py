@@ -8,12 +8,33 @@ app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 app.secret_key = '1234567'
 
+class Blog(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120))
+    body = db.Column(db.String(120))
+
+    def __init__(self,title,body):
+        self.title = title
+        self.body = body
+
 @app.route("/")
 def index():
-    return render_template('blog.html')
+    entries = Blog.query.order_by(Blog.id.desc()).all()
+    return render_template('blog.html',entries=entries)
 
-@app.route("/newpost")
+@app.route("/newpost", methods=['POST','GET'])
 def newpost():
+    if request.method == "POST":
+        title = request.form['title']
+        body = request.form['title']
+
+        new_entry = Blog(title,body)
+        db.session.add(new_entry)
+        db.session.commit()
+
+        return redirect("/")
+
     return render_template('newpost.html')
 
 if __name__ == '__main__':
