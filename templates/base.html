@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Build a Blog</title>
+
+        <style>
+            textarea {
+                width: 300px;
+                height: 120px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <a href="/">Main Blog Page</a>
+        <a href="/newpost">Add a Blog Entry</a>
+
+        {% block content %}
+        {% endblock %}
+        
+    </body>
+</html>

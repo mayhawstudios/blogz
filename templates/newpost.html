@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Add a New Entry</h1>
+
+<form>
+    Post Title:<br/>
+    <input type="text" name="title"><br/>
+    <br/>
+    Write Your Post:<br/>
+    <textarea name="body"></textarea><br/>
+    <input type="submit" value="Publish New Entry">
+</form>
+
+{% endblock %}
