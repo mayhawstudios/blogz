@@ -8,7 +8,7 @@
 <p>No posts yet</p>
 {% else %}
 {% for entry in entries %}
-<h2>{{entry.title}}</h2>
+<a href="/blogpost?id={{entry.id}}"><h2>{{entry.title}}</h2></a>
 <p>{{entry.body}}</p>
 <hr/>
 {% endfor %}

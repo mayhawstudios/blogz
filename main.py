@@ -43,10 +43,21 @@ def newpost():
             new_entry = Blog(title,body)
             db.session.add(new_entry)
             db.session.commit()
+            newentry = Blog.query.order_by(Blog.id.desc()).first()
+            id = newentry.id
 
-            return redirect("/")
+            return redirect("/blogpost?id="+str(id))
 
     return render_template('newpost.html')
+
+@app.route("/blogpost", methods=['GET'])
+def blogpost():
+    id = request.args.get('id')
+    entry = Blog.query.filter_by(id=id).first()
+    title = entry.title
+    body = entry.body
+
+    return render_template('blogpost.html',title=title,body=body)
 
 if __name__ == '__main__':
     app.run()
