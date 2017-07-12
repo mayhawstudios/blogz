@@ -27,13 +27,24 @@ def index():
 def newpost():
     if request.method == "POST":
         title = request.form['title']
-        body = request.form['title']
+        body = request.form['body']
+        t_error = ""
+        b_error = ""
 
-        new_entry = Blog(title,body)
-        db.session.add(new_entry)
-        db.session.commit()
+        if title == "":
+            t_error = "Please add a title to your post."
+        
+        if body == "":
+            b_error = "Please write a post for your blog here."
+        
+        if t_error != "" or b_error != "":
+            return render_template('newpost.html', t_error=t_error, b_error=b_error)
+        else:
+            new_entry = Blog(title,body)
+            db.session.add(new_entry)
+            db.session.commit()
 
-        return redirect("/")
+            return redirect("/")
 
     return render_template('newpost.html')
 
