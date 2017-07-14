@@ -6,11 +6,11 @@
 
 <form action="/newpost" method="post">
     Post Title:<br/>
-    <input type="text" name="title"><br/>
+    <input type="text" name="title" value="{{title}}"><br/>
     <span class="error">{{t_error}}</span>
     <br/>
     Write Your Post:<br/>
-    <textarea name="body"></textarea><br/>
+    <textarea name="body">{{body}}</textarea><br/>
         <span class="error">{{b_error}}</span><br/>
     <input type="submit" value="Publish New Entry">
 

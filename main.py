@@ -38,7 +38,8 @@ def newpost():
             b_error = "Please write a post for your blog here."
         
         if t_error != "" or b_error != "":
-            return render_template('newpost.html', t_error=t_error, b_error=b_error)
+            return render_template('newpost.html', title=title, body=body, 
+            t_error=t_error, b_error=b_error)
         else:
             new_entry = Blog(title,body)
             db.session.add(new_entry)
