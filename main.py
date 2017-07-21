@@ -46,7 +46,8 @@ def index():
 @app.route("/blog")
 def blog():
     entries = Blog.query.order_by(Blog.id.desc()).all()
-    return render_template('blog.html',entries=entries)
+    user = User.query.filter_by(id=entries.owner_id).all()
+    return render_template('blog.html',entries=entries, user=user)
 
 @app.route("/login",methods=['POST','GET'])
 def login():
