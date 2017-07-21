@@ -45,9 +45,14 @@ def index():
 
 @app.route("/blog")
 def blog():
-    entries = Blog.query.order_by(Blog.id.desc()).all()
-    user = User.query.filter_by(id=entries.owner_id).all()
-    return render_template('blog.html',entries=entries, user=user)
+    owner_id = request.args.get('user')
+
+    if owner_id:
+        entries = Blog.query.filter_by(owner_id=owner_id).order_by(Blog.id.desc()).all()
+    else:
+        entries = Blog.query.order_by(Blog.id.desc()).all()
+
+    return render_template('blog.html',entries=entries)
 
 @app.route("/login",methods=['POST','GET'])
 def login():
@@ -131,7 +136,7 @@ def signup():
             db.session.add(new_user)
             db.session.commit()
             session['username'] = username
-            return redirect("newpost.html")
+            return redirect("/newpost")
 
     return render_template('signup.html')
 
@@ -153,7 +158,8 @@ def newpost():
             return render_template('newpost.html', title=title, body=body, 
             t_error=t_error, b_error=b_error)
         else:
-            new_entry = Blog(title,body)
+            user_id = User.query.filter_by(username=session['username']).first()
+            new_entry = Blog(title,body,user_id)
             db.session.add(new_entry)
             db.session.commit()
             newentry = Blog.query.order_by(Blog.id.desc()).first()
@@ -167,10 +173,8 @@ def newpost():
 def blogpost():
     id = request.args.get('id')
     entry = Blog.query.filter_by(id=id).first()
-    title = entry.title
-    body = entry.body
 
-    return render_template('blogpost.html',title=title,body=body)
+    return render_template('blogpost.html', entry=entry)
 
 if __name__ == '__main__':
     app.run()

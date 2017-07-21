@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1>Build a Blog</h1>
+<h1>Blogz</h1>
 
 {% if entries|length == 0 %}
 <p>No posts yet</p>
@@ -10,7 +10,7 @@
 {% for entry in entries %}
 <a href="/blogpost?id={{entry.id}}"><h2>{{entry.title}}</h2></a>
 <p>{{entry.body}}</p>
-<p>Written by <a href="/blog?user={{entry.owner_id}}">{{user.id}}</a></p>
+<p>Written by <a href="/blog?user={{entry.owner_id}}">{{entry.user.username}}</a></p>
 <hr/>
 {% endfor %}
 

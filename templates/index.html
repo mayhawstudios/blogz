@@ -9,7 +9,7 @@
 {% else %}
 <ul>
 {% for blogger in index %}
-<li>{{ blogger.username }}</li>
+<li><a href="/blog?user={{blogger.id}}">{{ blogger.username }}</a></li>
 {% endfor %}
 </ul>
 
