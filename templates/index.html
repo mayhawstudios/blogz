@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>List of Bloggers</h1>
+
+{% if index|length == 0 %}
+<p>No bloggers yet.</p>
+{% else %}
+<ul>
+{% for blogger in index %}
+<li>{{ blogger.username }}</li>
+{% endfor %}
+</ul>
+
+{% endif %}
+
+{% endblock %}

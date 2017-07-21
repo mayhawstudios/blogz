@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>Build a Blog</title>
+        <title>Blogz</title>
 
         <style>
             h1 {
@@ -21,8 +21,11 @@
     </head>
 
     <body>
-        <a href="/">Main Blog Page</a>
+        <a href="/">Home</a>
+        <a href="/blog">All Posts</a>
         <a href="/newpost">Add a Blog Entry</a>
+        <a style="float:right;" href="/logout">Logout</a>
+        <a style="float:right;" href="/login">Login</a>
 
         {% block content %}
         {% endblock %}
